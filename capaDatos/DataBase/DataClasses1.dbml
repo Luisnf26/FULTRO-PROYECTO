@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FoodTruck" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-3UH12RA\SQLEXPRESS;Initial Catalog=FoodTruck;Integrated Security=True" SettingsObjectName="capaDatos.Properties.Settings" SettingsPropertyName="FoodTruckConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TM_Clientes" Member="TM_Clientes">
+    <Type Name="TM_Clientes">
+      <Column Name="cliente_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="apellido" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="direccion" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="telefono" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="correo_electronico" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="local_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PedidosID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TM_Clientes_TM_HamMaker" Member="TM_HamMaker" ThisKey="cliente_id" OtherKey="cliente_id" Type="TM_HamMaker" />
+      <Association Name="TM_Local_TM_Clientes" Member="TM_Local" ThisKey="local_id" OtherKey="local_id" Type="TM_Local" IsForeignKey="true" />
+      <Association Name="TM_Pedidos_TM_Clientes" Member="TM_Pedidos" ThisKey="PedidosID" OtherKey="PedidosId" Type="TM_Pedidos" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Contabilidad" Member="TM_Contabilidad">
+    <Type Name="TM_Contabilidad">
+      <Column Name="registro_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="ingresos" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="gastos" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="local_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TM_Contabilidad_TM_Pedidos" Member="TM_Pedidos" ThisKey="registro_id" OtherKey="registro_id" Type="TM_Pedidos" />
+      <Association Name="TM_Local_TM_Contabilidad" Member="TM_Local" ThisKey="local_id" OtherKey="local_id" Type="TM_Local" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Empleados" Member="TM_Empleados">
+    <Type Name="TM_Empleados">
+      <Column Name="empleado_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="apellido" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="direccion" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="telefono" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="salario" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="fecha_contratacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="local_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TM_Local_TM_Empleados" Member="TM_Local" ThisKey="local_id" OtherKey="local_id" Type="TM_Local" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_HamMaker" Member="TM_HamMaker">
+    <Type Name="TM_HamMaker">
+      <Column Name="HamMakerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="cliente_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IngredientesId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TM_Clientes_TM_HamMaker" Member="TM_Clientes" ThisKey="cliente_id" OtherKey="cliente_id" Type="TM_Clientes" IsForeignKey="true" />
+      <Association Name="TM_Ingredientes_TM_HamMaker" Member="TM_Ingredientes" ThisKey="IngredientesId" OtherKey="IngredientesId" Type="TM_Ingredientes" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Ingredientes" Member="TM_Ingredientes">
+    <Type Name="TM_Ingredientes">
+      <Column Name="IngredientesId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Pan" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Carnes" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Vegetales" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Cebolla" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Queso" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Salsa" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="MenuId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TM_Ingredientes_TM_HamMaker" Member="TM_HamMaker" ThisKey="IngredientesId" OtherKey="IngredientesId" Type="TM_HamMaker" />
+      <Association Name="TM_Menu_TM_Ingredientes" Member="TM_Menu" ThisKey="MenuId" OtherKey="MenuId" Type="TM_Menu" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Local" Member="TM_Local">
+    <Type Name="TM_Local">
+      <Column Name="local_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="direccion" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="TM_Local_TM_Clientes" Member="TM_Clientes" ThisKey="local_id" OtherKey="local_id" Type="TM_Clientes" />
+      <Association Name="TM_Local_TM_Contabilidad" Member="TM_Contabilidad" ThisKey="local_id" OtherKey="local_id" Type="TM_Contabilidad" />
+      <Association Name="TM_Local_TM_Empleados" Member="TM_Empleados" ThisKey="local_id" OtherKey="local_id" Type="TM_Empleados" />
+      <Association Name="TM_Local_TM_Menu" Member="TM_Menu" ThisKey="local_id" OtherKey="local_id" Type="TM_Menu" />
+      <Association Name="TM_Local_TM_Pedidos" Member="TM_Pedidos" ThisKey="local_id" OtherKey="local_id" Type="TM_Pedidos" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Menu" Member="TM_Menu">
+    <Type Name="TM_Menu">
+      <Column Name="MenuId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Hamburguesas" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Bebidas" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Postres" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Extras" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="local_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TM_Menu_TM_Ingredientes" Member="TM_Ingredientes" ThisKey="MenuId" OtherKey="MenuId" Type="TM_Ingredientes" />
+      <Association Name="TM_Local_TM_Menu" Member="TM_Local" ThisKey="local_id" OtherKey="local_id" Type="TM_Local" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TM_Pedidos" Member="TM_Pedidos">
+    <Type Name="TM_Pedidos">
+      <Column Name="PedidosId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Pedido" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="registro_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="local_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TM_Pedidos_TM_Clientes" Member="TM_Clientes" ThisKey="PedidosId" OtherKey="PedidosID" Type="TM_Clientes" />
+      <Association Name="TM_Local_TM_Pedidos" Member="TM_Local" ThisKey="local_id" OtherKey="local_id" Type="TM_Local" IsForeignKey="true" />
+      <Association Name="TM_Contabilidad_TM_Pedidos" Member="TM_Contabilidad" ThisKey="registro_id" OtherKey="registro_id" Type="TM_Contabilidad" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
