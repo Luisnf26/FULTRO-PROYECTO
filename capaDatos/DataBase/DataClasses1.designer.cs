@@ -54,6 +54,9 @@ namespace capaDatos.DataBase
     partial void InsertTM_Pedidos(TM_Pedidos instance);
     partial void UpdateTM_Pedidos(TM_Pedidos instance);
     partial void DeleteTM_Pedidos(TM_Pedidos instance);
+    partial void InsertTM_Usuarios(TM_Usuarios instance);
+    partial void UpdateTM_Usuarios(TM_Usuarios instance);
+    partial void DeleteTM_Usuarios(TM_Usuarios instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -149,9 +152,15 @@ namespace capaDatos.DataBase
 				return this.GetTable<TM_Pedidos>();
 			}
 		}
-
-        public object Categories { get; set; }
-    }
+		
+		public System.Data.Linq.Table<TM_Usuarios> TM_Usuarios
+		{
+			get
+			{
+				return this.GetTable<TM_Usuarios>();
+			}
+		}
+	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TM_Clientes")]
 	public partial class TM_Clientes : INotifyPropertyChanging, INotifyPropertyChanged
@@ -2296,6 +2305,140 @@ namespace capaDatos.DataBase
 		{
 			this.SendPropertyChanging();
 			entity.TM_Pedidos = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TM_Usuarios")]
+	public partial class TM_Usuarios : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _UsuarioID;
+		
+		private string _Usuario;
+		
+		private string _Contraseña;
+		
+		private string _Correo_Electronico;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUsuarioIDChanging(int value);
+    partial void OnUsuarioIDChanged();
+    partial void OnUsuarioChanging(string value);
+    partial void OnUsuarioChanged();
+    partial void OnContraseñaChanging(string value);
+    partial void OnContraseñaChanged();
+    partial void OnCorreo_ElectronicoChanging(string value);
+    partial void OnCorreo_ElectronicoChanged();
+    #endregion
+		
+		public TM_Usuarios()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsuarioID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int UsuarioID
+		{
+			get
+			{
+				return this._UsuarioID;
+			}
+			set
+			{
+				if ((this._UsuarioID != value))
+				{
+					this.OnUsuarioIDChanging(value);
+					this.SendPropertyChanging();
+					this._UsuarioID = value;
+					this.SendPropertyChanged("UsuarioID");
+					this.OnUsuarioIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Usuario", DbType="NVarChar(20)")]
+		public string Usuario
+		{
+			get
+			{
+				return this._Usuario;
+			}
+			set
+			{
+				if ((this._Usuario != value))
+				{
+					this.OnUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._Usuario = value;
+					this.SendPropertyChanged("Usuario");
+					this.OnUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contraseña", DbType="NVarChar(20)")]
+		public string Contraseña
+		{
+			get
+			{
+				return this._Contraseña;
+			}
+			set
+			{
+				if ((this._Contraseña != value))
+				{
+					this.OnContraseñaChanging(value);
+					this.SendPropertyChanging();
+					this._Contraseña = value;
+					this.SendPropertyChanged("Contraseña");
+					this.OnContraseñaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Correo_Electronico", DbType="NVarChar(20)")]
+		public string Correo_Electronico
+		{
+			get
+			{
+				return this._Correo_Electronico;
+			}
+			set
+			{
+				if ((this._Correo_Electronico != value))
+				{
+					this.OnCorreo_ElectronicoChanging(value);
+					this.SendPropertyChanging();
+					this._Correo_Electronico = value;
+					this.SendPropertyChanged("Correo_Electronico");
+					this.OnCorreo_ElectronicoChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

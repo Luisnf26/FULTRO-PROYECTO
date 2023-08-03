@@ -48,5 +48,10 @@ namespace capaNegocio.Acciones
         {
             return dbLibContext.TM_Pedidos.ToList();
         }
+
+        public List<TM_Usuarios> listTM_Usuarios()
+        {
+            return dbLibContext.TM_Usuarios.ToList();
+        }
     }
 }

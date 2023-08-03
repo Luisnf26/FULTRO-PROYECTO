@@ -100,4 +100,12 @@
       <Association Name="TM_Contabilidad_TM_Pedidos" Member="TM_Contabilidad" ThisKey="registro_id" OtherKey="registro_id" Type="TM_Contabilidad" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TM_Usuarios" Member="TM_Usuarios">
+    <Type Name="TM_Usuarios">
+      <Column Name="UsuarioID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Usuario" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Contraseña" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Correo_Electronico" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>
