@@ -3,8 +3,44 @@
     ViewBag.Title = "Mantenimiento";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model FULTRO_PROYECTO.Controllers.SecurityController.MantenimientoView
 
-<h2>Mantenimiento</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mantenimiento</title>
+</head>
+<body>
 
+    <h2>Mantenimiento</h2>
 
-<title>Iniciar sesión</title>
+    <!-- Tabla TM_Clientes -->
+    <h3>Clientes</h3>
+    <table>
+        <tr>
+            <th>Cliente ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Correo Electrónico</th>
+            <th>Local ID</th>
+            <th>Pedidos ID</th>
+        </tr>
+        @foreach (var clientes in Model.Clientes)
+        {
+            <tr>
+                <td>@clientes.cliente_id</td>
+                <td>@clientes.nombre</td>
+                <td>@clientes.apellido</td>
+                <td>@clientes.direccion</td>
+                <td>@clientes.telefono</td>
+                <td>@clientes.correo_electronico</td>
+                <td>@clientes.local_id</td>
+                <td>@clientes.PedidosID</td>
+            </tr>
+        }
+    </table>
+
+</body>
+</html>
