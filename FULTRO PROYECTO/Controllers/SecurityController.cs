@@ -21,7 +21,7 @@ namespace FULTRO_PROYECTO.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult LoginAdmin(string username, string password)
         {
             
             {
@@ -42,9 +42,9 @@ namespace FULTRO_PROYECTO.Controllers
                     ViewBag.ErrorMessage = "Usuario o contraseña incorrectos.";
                     return View();
                 }
-
             }
         }
+
         public ActionResult Logout()
         {
             return RedirectToAction("LoginAdmin");
@@ -63,7 +63,7 @@ namespace FULTRO_PROYECTO.Controllers
         }
         public ActionResult Mantenimiento()
         {
-            using (var db = new DataClasses1DataContext()) 
+            using (var db = new DataClasses1DataContext())
             {
                 var clientes = db.TM_Clientes.ToList();
                 var contabilidad = db.TM_Contabilidad.ToList();

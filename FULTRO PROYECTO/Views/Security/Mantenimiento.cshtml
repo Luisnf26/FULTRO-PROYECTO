@@ -15,29 +15,27 @@
     <h2>Mantenimiento</h2>
 
     <!-- Tabla TM_Clientes -->
-    <h3>Clientes</h3>
+    <h3>Menu</h3>
     <table>
         <tr>
-            <th>Cliente ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Correo Electrónico</th>
+            <th>Menu ID</th>
+            <th>Hamburguesas</th>
+            <th>Bebidas</th>
+            <th>Postres</th>
+            <th>Extras</th>
             <th>Local ID</th>
-            <th>Pedidos ID</th>
+
         </tr>
-        @foreach (var clientes in Model.Clientes)
+        @foreach (var menu in Model.Menu)
         {
             <tr>
-                <td>@clientes.cliente_id</td>
-                <td>@clientes.nombre</td>
-                <td>@clientes.apellido</td>
-                <td>@clientes.direccion</td>
-                <td>@clientes.telefono</td>
-                <td>@clientes.correo_electronico</td>
-                <td>@clientes.local_id</td>
-                <td>@clientes.PedidosID</td>
+                <td>@menu.MenuId</td>
+                <td>@menu.Hamburguesas</td>
+                <td>@menu.Bebidas</td>
+                <td>@menu.Postres</td>
+                <td>@menu.Extras</td>
+                <td>@menu.local_id</td>
+
             </tr>
         }
     </table>

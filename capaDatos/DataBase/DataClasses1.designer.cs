@@ -2313,14 +2313,14 @@ namespace capaDatos.DataBase
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _UsuarioID;
-		
-		private string _Usuario;
-		
-		private string _Contraseña;
-		
-		private string _Correo_Electronico;
+
+        private int _UsuarioID;
+
+        private string _Usuario;
+
+        private string _Contraseña;
+
+        private string _Correo_Electronico;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
