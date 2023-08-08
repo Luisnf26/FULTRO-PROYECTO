@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Mantenimiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model FULTRO_PROYECTO.Controllers.SecurityController.MantenimientoView
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mantenimiento</title>
+</head>
+<body>
+
+    <h2>Mantenimiento</h2>
+
+    <!-- Tabla TM_Clientes -->
+    <h3>Menu</h3>
+    <table>
+        <tr>
+            <th>Menu ID</th>
+            <th>Hamburguesas</th>
+            <th>Bebidas</th>
+            <th>Postres</th>
+            <th>Extras</th>
+            <th>Local ID</th>
+
+        </tr>
+        @foreach (var menu in Model.Menu)
+        {
+            <tr>
+                <td>@menu.MenuId</td>
+                <td>@menu.Hamburguesas</td>
+                <td>@menu.Bebidas</td>
+                <td>@menu.Postres</td>
+                <td>@menu.Extras</td>
+                <td>@menu.local_id</td>
+
+            </tr>
+        }
+    </table>
+
+</body>
+</html>

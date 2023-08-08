@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "LoginAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LoginAdmin</h2>
+
+@* Aquí se incluirá el formulario de inicio de sesión *@
+  @using (Html.BeginForm("LoginAdmin", "Security", FormMethod.Post))
+{
+    <div>
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" />
+    </div>
+
+    <div>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" />
+    </div>
+
+    <input type="submit" value="Iniciar sesión" />
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="error-message">
+        @ViewBag.ErrorMessage
+    </div>
+}
