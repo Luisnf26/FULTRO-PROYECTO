@@ -1,44 +1,274 @@
-﻿
+﻿@model FULTRO_PROYECTO.Controllers.SecurityController.MantenimientoView
+
 @{
     ViewBag.Title = "Mantenimiento";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model FULTRO_PROYECTO.Controllers.SecurityController.MantenimientoView
+
+
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Mantenimiento</title>
+    <!-- Agregar referencias a las librerías de DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Inicializar DataTables para cada tabla mostrada
+            $('#tableMenu').DataTable();
+            $('#tableClientes').DataTable();
+            $('#tableContabilidad').DataTable();
+        });
+    </script>
 </head>
 <body>
 
     <h2>Mantenimiento</h2>
 
-    <!-- Tabla TM_Clientes -->
-    <h3>Menu</h3>
-    <table>
-        <tr>
-            <th>Menu ID</th>
-            <th>Hamburguesas</th>
-            <th>Bebidas</th>
-            <th>Postres</th>
-            <th>Extras</th>
-            <th>Local ID</th>
+    <!-- Dropdown para seleccionar la tabla -->
+    <form method="post" action="">
+        @Html.AntiForgeryToken()
 
-        </tr>
-        @foreach (var menu in Model.Menu)
+        <label for="tabla">Seleccionar Tabla:</label>
+        <select id="tabla" name="Tabla">
+            <option value="TM_Menu">TM_Menu</option>
+            <option value="TM_Clientes">TM_Clientes</option>
+            <option value="TM_Contabilidad">TM_Contabilidad</option>
+            <!-- Agregar más opciones para otras tablas -->
+        </select>
+        <input type="submit" value="Mostrar Tabla" name="submit" />
+    </form>
+
+    <div id="tablaContainer">
+        <!-- Aquí se mostrará la tabla y el formulario -->
+        @if (!string.IsNullOrEmpty(Model.SelectedTable))
         {
-            <tr>
-                <td>@menu.MenuId</td>
-                <td>@menu.Hamburguesas</td>
-                <td>@menu.Bebidas</td>
-                <td>@menu.Postres</td>
-                <td>@menu.Extras</td>
-                <td>@menu.local_id</td>
+            if (Model.SelectedTable == "TM_Menu")
+            {
+                <h3>Menu</h3>
+                <table id="tableMenu">
+                    <!-- Código para mostrar la tabla TM_Menu -->
+                    <thead>
+                        <tr>
+                            <th>Menu ID</th>
+                            <th>Hamburguesas</th>
+                            <th>Bebidas</th>
+                            <th>Postres</th>
+                            <th>Extras</th>
+                            <th>Local ID</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var menu in Model.Menu)
+                        {
+                            <tr>
+                                <td>@menu.MenuId</td>
+                                <td>@menu.Hamburguesas</td>
+                                <td>@menu.Bebidas</td>
+                                <td>@menu.Postres</td>
+                                <td>@menu.Extras</td>
+                                <td>@menu.local_id</td>
+                                <td>
+                                    <button type="button" onclick="eliminarMenu('@menu.MenuId')">Eliminar</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
 
-            </tr>
+                <h3>Agregar nuevo elemento</h3>
+                using (Html.BeginForm("AgregarMenu", "Security", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" name="SelectedTable" value="@Model.SelectedTable" />
+
+                    <div>
+                        <label for="hamburguesas">Hamburguesas:</label>
+                        <input type="text" id="hamburguesas" name="Hamburguesas" />
+                    </div>
+
+                    <div>
+                        <label for="bebidas">Bebidas:</label>
+                        <input type="text" id="bebidas" name="Bebidas" />
+                    </div>
+
+                    <div>
+                        <label for="postres">Postres:</label>
+                        <input type="text" id="postres" name="Postres" />
+                    </div>
+
+                    <div>
+                        <label for="extras">Extras:</label>
+                        <input type="text" id="extras" name="Extras" />
+                    </div>
+
+                    <div>
+                        <label for="local_id">Local ID:</label>
+                        <input type="text" id="local_id" name="LocalId" />
+                    </div>
+
+                    <input type="submit" value="Agregar Menu" />
+                }
+            }
+            else if (Model.SelectedTable == "TM_Clientes")
+            {
+                <h3>Clientes</h3>
+                <table id="tableClientes">
+                    <!-- Código para mostrar la tabla TM_Clientes -->
+                    <thead>
+                        <tr>
+                            <th>Cliente ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Dirección</th>
+                            <th>Teléfono</th>
+                            <th>Correo Electrónico</th>
+                            <th>Local ID</th>
+                            <th>Pedidos ID</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cliente in Model.Clientes)
+                        {
+                            <tr>
+                                <td>@cliente.cliente_id</td>
+                                <td>@cliente.nombre</td>
+                                <td>@cliente.apellido</td>
+                                <td>@cliente.direccion</td>
+                                <td>@cliente.telefono</td>
+                                <td>@cliente.correo_electronico</td>
+                                <td>@cliente.local_id</td>
+                                <td>@cliente.PedidosID</td>
+                                <td>
+                                    <button type="button" onclick="eliminarCliente('@cliente.cliente_id')">Eliminar</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <h3>Agregar nuevo elemento</h3>
+                using (Html.BeginForm("AgregarCliente", "Security", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" name="SelectedTable" value="@Model.SelectedTable" />
+
+                    <div>
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="Nombre" />
+                    </div>
+
+                    <div>
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" id="apellido" name="Apellido" />
+                    </div>
+
+                    <div>
+                        <label for="direccion">Dirección:</label>
+                        <input type="text" id="direccion" name="Direccion" />
+                    </div>
+
+                    <div>
+                        <label for="telefono">Teléfono:</label>
+                        <input type="text" id="telefono" name="Telefono" />
+                    </div>
+
+                    <div>
+                        <label for="correo_electronico">Correo Electrónico:</label>
+                        <input type="text" id="correo_electronico" name="CorreoElectronico" />
+                    </div>
+
+                    <div>
+                        <label for="local_id">Local ID:</label>
+                        <input type="text" id="local_id" name="LocalId" />
+                    </div>
+
+                    <div>
+                        <label for="PedidosID">Pedidos ID:</label>
+                        <input type="text" id="PedidosID" name="PedidosID" />
+                    </div>
+
+                    <input type="submit" value="Agregar Cliente" />
+                }
+            }
+            else if (Model.SelectedTable == "TM_Contabilidad")
+            {
+                <h3>Contabilidad</h3>
+                <table id="tableContabilidad">
+                    <!-- Código para mostrar la tabla TM_Contabilidad -->
+                    <thead>
+                        <tr>
+                            <th>Registro ID</th>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                            <th>Ingresos</th>
+                            <th>Gastos</th>
+                            <th>Local ID</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var contabilidad in Model.Contabilidad)
+                        {
+                            <tr>
+                                <td>@contabilidad.registro_id</td>
+                                <td>@contabilidad.fecha</td>
+                                <td>@contabilidad.descripcion</td>
+                                <td>@contabilidad.ingresos</td>
+                                <td>@contabilidad.gastos</td>
+                                <td>@contabilidad.local_id</td>
+                                <td>
+                                    <button type="button" onclick="eliminarContabilidad('@contabilidad.registro_id')">Eliminar</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <h3>Agregar nuevo elemento</h3>
+                using (Html.BeginForm("AgregarContabilidad", "Security", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden" name="SelectedTable" value="@Model.SelectedTable" />
+
+                    <div>
+                        <label for="fecha">Fecha:</label>
+                        <input type="text" id="fecha" name="Fecha" />
+                    </div>
+
+                    <div>
+                        <label for="descripcion">Descripción:</label>
+                        <input type="text" id="descripcion" name="Descripcion" />
+                    </div>
+
+                    <div>
+                        <label for="ingresos">Ingresos:</label>
+                        <input type="text" id="ingresos" name="Ingresos" />
+                    </div>
+
+                    <div>
+                        <label for="gastos">Gastos:</label>
+                        <input type="text" id="gastos" name="Gastos" />
+                    </div>
+
+                    <div>
+                        <label for="local_id">Local ID:</label>
+                        <input type="text" id="local_id" name="LocalId" />
+                    </div>
+
+                    <input type="submit" value="Agregar Contabilidad" />
+                }
+            }
         }
-    </table>
+    </div>
 
 </body>
 </html>

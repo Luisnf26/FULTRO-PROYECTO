@@ -57,9 +57,19 @@ namespace capaDatos.DataBase
     partial void InsertTM_Usuarios(TM_Usuarios instance);
     partial void UpdateTM_Usuarios(TM_Usuarios instance);
     partial void DeleteTM_Usuarios(TM_Usuarios instance);
-    #endregion
-		
-		public DataClasses1DataContext() : 
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(TM_Menu nuevoMenu)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        public DataClasses1DataContext() : 
 				base(global::capaDatos.Properties.Settings.Default.FoodTruckConnectionString, mappingSource)
 		{
 			OnCreated();
